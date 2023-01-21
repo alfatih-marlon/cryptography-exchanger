@@ -13,6 +13,7 @@ reward = 25.0
 leading_zeros = 2
 next_char_limit = 20
 
+
 class TxBlock(CBlock):
     nonce = "AAAAAAA"
 
@@ -22,7 +23,7 @@ class TxBlock(CBlock):
     def addTx(self, Tx_in):
         self.data.append(Tx_in)
 
-    def __count_totals(self):
+    def count_totals(self):
         total_in = 0
         total_out = 0
         for tx in self.data:
@@ -38,7 +39,7 @@ class TxBlock(CBlock):
         for tx in self.data:
             if not tx.is_valid():
                 return False
-        total_in, total_out = self.__count_totals()
+        total_in, total_out = self.count_totals()
         if total_out - total_in - reward > 0.000000000001:
             return False
         return True
@@ -61,6 +62,7 @@ class TxBlock(CBlock):
             if self.good_nonce():
                 return self.nonce
         return None
+
 
 if __name__ == "__main__":
     pr1, pu1 = generate_keys()
