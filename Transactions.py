@@ -1,4 +1,4 @@
-# Transaction.py
+# Transactions.py
 import Signatures
 
 # Signatures.sign

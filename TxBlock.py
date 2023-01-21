@@ -1,7 +1,7 @@
 # TxBlock
 from Blockchain import CBlock
 from Signatures import generate_keys, sign, verify
-from Transaction import Tx
+from Transactions import Tx
 import pickle
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
