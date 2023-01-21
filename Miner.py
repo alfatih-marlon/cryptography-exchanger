@@ -64,13 +64,3 @@ def minerServer(my_ip, wallet_list, my_public):
 
 my_pr, my_pu = Signatures.generate_keys()
 minerServer('localhost', wallets, my_pu)
-
-
-
-
-
-
-
-
-
-

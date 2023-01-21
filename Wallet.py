@@ -1,13 +1,13 @@
-# Wallet
+#Wallet
 import SocketUtils
 import Transactions
 import Signatures
 
 head_blocks = [None]
 
-pr1, pu1 = Signatures.generate_keys()
-pr2, pu2 = Signatures.generate_keys()
-pr3, pu3 = Signatures.generate_keys()
+pr1,pu1 = Signatures.generate_keys()
+pr2,pu2 = Signatures.generate_keys()
+pr3,pu3 = Signatures.generate_keys()
 
 Tx1 = Transactions.Tx()
 Tx2 = Transactions.Tx()
@@ -25,14 +25,14 @@ Tx2.sign(pr3)
 Tx2.sign(pr1)
 
 try:
-    SocketUtils.sendObj('localhost', Tx1)
-    print("Sent Tx1")
-    SocketUtils.sendObj('localhost', Tx2)
-    print("Sent Tx2")
+    SocketUtils.sendObj('localhost',Tx1)
+    print ("Sent Tx1")
+    SocketUtils.sendObj('localhost',Tx2)
+    print ("Sent Tx2")
 except:
-    print("Error! Connection unsuccessful")
+    print ("Error! Connection unsuccessful")
 
-server = SocketUtils.newServerConnection('localhost', 5006)
+server = SocketUtils.newServerConnection('localhost',5006)
 for i in range(30):
     newBlock = SocketUtils.recvObj(server)
     if newBlock:
