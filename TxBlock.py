@@ -11,7 +11,7 @@ import time
 
 reward = 25.0
 leading_zeros = 2
-next_char_limit = 20
+next_char_limit = 100
 
 
 class TxBlock(CBlock):
@@ -55,13 +55,28 @@ class TxBlock(CBlock):
             return False
         return int(this_hash[leading_zeros]) < next_char_limit
 
-    def find_nonce(self):
-        for i in range(1000000):
+    def find_nonce(self, n_tries=1000000):
+        for i in range(n_tries):
             self.nonce = ''.join([
                 chr(random.randint(0, 255)) for i in range(10 * leading_zeros)])
             if self.good_nonce():
                 return self.nonce
         return None
+
+
+def findLongestBlockchain(head_blocks):
+    longest = -1
+    long_head = None
+    for b in head_blocks:
+        current = b
+        this_len = 0
+        while current != None:
+            this_len = this_len + 1
+            current = current.previousBlock
+        if this_len > longest:
+            long_head = b
+            longest = this_len
+    return long_head
 
 
 if __name__ == "__main__":

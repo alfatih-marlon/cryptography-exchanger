@@ -6,6 +6,7 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import serialization
 
+
 def generate_keys():
     private = rsa.generate_private_key(
         public_exponent=65537,
@@ -19,6 +20,7 @@ def generate_keys():
     )
     return private, pu_ser
 
+
 def sign(message, private):
     message = bytes(str(message), 'utf-8')
     sig = private.sign(
@@ -30,6 +32,7 @@ def sign(message, private):
         hashes.SHA256()
     )
     return sig
+
 
 def verify(message, sig, pu_ser):
     public = serialization.load_pem_public_key(
@@ -54,6 +57,44 @@ def verify(message, sig, pu_ser):
     except:
         print("Error executing public_key.verify")
         return False
+
+
+def savePrivate(pr_key, filename):
+    pem = pr_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=serialization.NoEncryption()
+    )
+    fp = open(filename, "wb")
+    fp.write(pem)
+    fp.close()
+    return
+
+
+def loadPrivate(filename):
+    fin = open(filename, "rb")
+    pr_key = serialization.load_pem_private_key(
+        fin.read(),
+        password=None,
+        backend=default_backend()
+    )
+    fin.close()
+    return pr_key
+
+
+def savePublic(pu_key, filename):
+    fp = open(filename, "wb")
+    fp.write(pu_key)
+    fp.close()
+    return True
+
+
+def loadPublic(filename):
+    fin = open(filename, "rb")
+    pu_key = fin.read()
+    fin.close()
+    return pu_key
+
 
 if __name__ == '__main__':
     pr, pu = generate_keys()
@@ -86,3 +127,21 @@ if __name__ == '__main__':
         print("ERROR! Tampered message checks out!")
     else:
         print("Success! Tampering detected")
+
+    savePrivate(pr2, "private.key")
+    pr_load = loadPrivate("private.key")
+    sig3 = sign(message, pr_load)
+    correct = verify(message, sig3, pu2)
+    if correct:
+        print("Success! Good loaded private key")
+    else:
+        print("ERROR! Load private key is bad")
+
+    savePublic(pu2, "public.key")
+    pu_load = loadPublic("public.key")
+
+    correct = verify(message, sig3, pu_load)
+    if correct:
+        print("Success! Good loaded public key")
+    else:
+        print("ERROR! Load public key is bad")
