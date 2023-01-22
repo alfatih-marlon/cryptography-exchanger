@@ -1,6 +1,5 @@
 # client.py
 
-
 import TxBlock
 import Transactions
 import Signatures
@@ -41,6 +40,3 @@ if __name__ == "__main__":
     sendBlock('localhost', B1)
 
     sendBlock('localhost', Tx2)
-
-
-

@@ -82,13 +82,11 @@ def saveBlocks(block_list, filename):
     fp.close()
     return True
 
-
 def loadBlocks(filename):
     fin = open(filename, "rb")
     ret = pickle.load(fin)
     fin.close()
     return ret
-
 
 if __name__ == "__main__":
 
