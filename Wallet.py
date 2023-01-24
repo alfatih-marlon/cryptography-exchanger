@@ -15,7 +15,6 @@ def StopAll():
     global break_now
     break_now = True
 
-
 def walletServer(my_addr):
     global head_blocks
     head_blocks = [None]
