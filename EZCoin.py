@@ -40,10 +40,6 @@ def makeNewKeys():
     return None, None
 
 
-
-
-
-
 if __name__ == "__main__":
     startMiner()
     startWallet()

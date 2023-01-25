@@ -6,7 +6,6 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import serialization
 
-
 def generate_keys():
     private = rsa.generate_private_key(
         public_exponent=65537,
@@ -20,7 +19,6 @@ def generate_keys():
     )
     return private, pu_ser
 
-
 def sign(message, private):
     message = bytes(str(message), 'utf-8')
     sig = private.sign(
@@ -32,7 +30,6 @@ def sign(message, private):
         hashes.SHA256()
     )
     return sig
-
 
 def verify(message, sig, pu_ser):
     public = serialization.load_pem_public_key(
@@ -58,7 +55,6 @@ def verify(message, sig, pu_ser):
         print("Error executing public_key.verify")
         return False
 
-
 def savePrivate(pr_key, filename):
     pem = pr_key.private_bytes(
         encoding=serialization.Encoding.PEM,
@@ -70,7 +66,6 @@ def savePrivate(pr_key, filename):
     fp.close()
     return
 
-
 def loadPrivate(filename):
     fin = open(filename, "rb")
     pr_key = serialization.load_pem_private_key(
@@ -81,20 +76,17 @@ def loadPrivate(filename):
     fin.close()
     return pr_key
 
-
 def savePublic(pu_key, filename):
     fp = open(filename, "wb")
     fp.write(pu_key)
     fp.close()
     return True
 
-
 def loadPublic(filename):
     fin = open(filename, "rb")
     pu_key = fin.read()
     fin.close()
     return pu_key
-
 
 if __name__ == '__main__':
     pr, pu = generate_keys()
