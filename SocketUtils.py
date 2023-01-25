@@ -6,11 +6,13 @@ import select
 TCP_PORT = 5005
 BUFFER_SIZE=1024
 
+
 def newServerConnection(ip_addr, port=TCP_PORT):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((ip_addr,port))
     s.listen()
     return s
+
 
 def recvObj(socket):
     new_sock,addr = socket.accept()
@@ -21,6 +23,7 @@ def recvObj(socket):
         all_data = all_data + data
     return pickle.loads(all_data)
 
+
 def sendBlock(ip_addr, blk, port=TCP_PORT):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((ip_addr, port))
@@ -28,6 +31,7 @@ def sendBlock(ip_addr, blk, port=TCP_PORT):
     s.send(data)
     s.close()
     return False
+
 
 if __name__ == "__main__":
     server = newServerConnection('localhost')

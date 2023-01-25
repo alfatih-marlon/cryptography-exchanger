@@ -6,6 +6,7 @@ wallets=[]
 miners=[]
 my_ip = 'localhost'
 
+
 def startMiner():
     #Start nonceFinder
     #Start minerServer
@@ -13,11 +14,14 @@ def startMiner():
     #Load head_blocks
     #Load public_key
     return True
+
+
 def startWallet():
     #Start walletServer
     #Load public and private keys
     #Load head_blocsk
     return True
+
 
 def stopMiner():
     #Stop nonceFinder
@@ -25,16 +29,21 @@ def stopMiner():
     #Save tx_list
     #Save head_blocks
     return True
+
+
 def stopWallet():
     #Stop walletServer
     #Save head_blocks
     return True
 
+
 def getBalance(pu_key):
     return 0.0
 
+
 def sendCoins(pu_recv, amt, tx_fee):
     return True
+
 
 def makeNewKeys():
     return None, None

@@ -8,6 +8,7 @@ import socket
 
 TCP_PORT = 5005
 
+
 def sendBlock(ip_addr, blk):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((ip_addr, TCP_PORT))
@@ -15,6 +16,7 @@ def sendBlock(ip_addr, blk):
     s.send(data)
     s.close()
     return False
+
 
 if __name__ == "__main__":
     pr1, pu1 = Signatures.generate_keys()

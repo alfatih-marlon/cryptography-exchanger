@@ -3,11 +3,13 @@ import threading
 import time
 import random
 
+
 def printA():
     for i in range(6):
         print("A" + str(i) + " ... . ...")
         time.sleep(random.randint(1, 4) * 0.1)
     return 89
+
 
 def printB():
     for i in range(6):
@@ -15,10 +17,12 @@ def printB():
         time.sleep(random.randint(1, 4) * 0.1)
     return 89
 
+
 def printAny(inlist):
     for item in inlist:
         print(str(item))
         time.sleep(random.randint(1, 4) * 0.1)
+
 
 t1 = threading.Thread(target=printA)
 

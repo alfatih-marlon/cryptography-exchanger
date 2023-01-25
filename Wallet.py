@@ -10,9 +10,11 @@ miners = [('localhost', 5005)]
 break_now = False
 verbose = False
 
+
 def StopAll():
     global break_now
     break_now = True
+
 
 def walletServer(my_addr):
     global head_blocks
@@ -44,6 +46,7 @@ def walletServer(my_addr):
     server.close()
     return True
 
+
 def getBalance(pu_key):
     long_chain = TxBlock.findLongestBlockchain(head_blocks)
     this_block = long_chain
@@ -59,6 +62,7 @@ def getBalance(pu_key):
         this_block = this_block.previousBlock
     return bal
 
+
 def sendCoins(pu_send, amt_send, pr_send, pu_recv, amt_recv, miner_list):
     newTx = Transactions.Tx()
     newTx.add_input(pu_send, amt_send)
@@ -67,8 +71,10 @@ def sendCoins(pu_send, amt_send, pr_send, pu_recv, amt_recv, miner_list):
     SocketUtils.sendObj('localhost', newTx)
     return True
 
+
 def loadKeys(pr_file, pu_file):
     return Signatures.loadPrivate(pr_file), Signatures.loadPublic(pu_file)
+
 
 def saveBlocks(block_list, filename):
     fp = open(filename, "wb")
@@ -76,11 +82,13 @@ def saveBlocks(block_list, filename):
     fp.close()
     return True
 
+
 def loadBlocks(filename):
     fin = open(filename, "rb")
     ret = pickle.load(fin)
     fin.close()
     return ret
+
 
 if __name__ == "__main__":
 

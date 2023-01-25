@@ -4,6 +4,7 @@ import Signatures
 # Signatures.sign
 # Signatures.verify
 
+
 class Tx:
     inputs = None
     outputs = None
@@ -85,6 +86,7 @@ class Tx:
             reprstr = reprstr + str(s) + "\n"
         reprstr = reprstr + "END\n"
         return reprstr
+
 
 if __name__ == "__main__":
     pr1, pu1 = Signatures.generate_keys()

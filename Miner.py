@@ -10,9 +10,11 @@ head_blocks = [None]
 break_now = False
 verbose = True
 
+
 def StopAll():
     global break_now
     break_now = True
+
 
 def minerServer(my_addr):
     global tx_list
@@ -27,6 +29,7 @@ def minerServer(my_addr):
             tx_list.append(newTx)
             if verbose: print("Recd tx")
     return False
+
 
 def nonceFinder(wallet_list, miner_public):
     global break_now
@@ -61,17 +64,20 @@ def nonceFinder(wallet_list, miner_public):
 
     return True
 
+
 def loadTxList(filename):
     fin = open(filename, "rb")
     ret = pickle.load(fin)
     fin.close()
     return ret
 
+
 def saveTxList(the_list, filename):
     fp = open(filename, "wb")
     pickle.dump(the_list, fp)
     fp.close()
     return True
+
 
 if __name__ == "__main__":
 
